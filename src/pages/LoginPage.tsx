@@ -108,24 +108,7 @@ export const LoginPage = () => {
               </Button>
             </form>
             
-            <div className="text-center mt-6 space-y-2">
-              <p className="text-sm text-muted-foreground">
-                Don't have an account?{" "}
-                <Button 
-                  variant="link" 
-                  className="p-0 h-auto font-medium text-primary"
-                  onClick={() => navigate('/signup')}
-                >
-                  Sign up
-                </Button>
-              </p>
-              <Button 
-                variant="link" 
-                className="p-0 h-auto text-xs text-muted-foreground"
-              >
-                Forgot your password?
-              </Button>
-            </div>
+            
           </CardContent>
         </Card>
       </div>

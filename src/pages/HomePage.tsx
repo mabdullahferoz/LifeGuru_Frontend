@@ -32,12 +32,7 @@ export const HomePage = () => {
             >
               Login
             </Button>
-            <Button 
-              className="bg-white/90 text-foreground shadow-soft hover:bg-white hover:shadow-glow transition-smooth"
-              onClick={() => navigate('/signup')}
-            >
-              Sign Up
-            </Button>
+            
           </div>
         </header>
 
@@ -65,7 +60,7 @@ export const HomePage = () => {
                 <Button 
                   size="lg"
                   className="bg-white text-foreground shadow-glow hover:shadow-soft transition-smooth text-lg px-8"
-                  onClick={() => navigate('/signup')}
+                  onClick={() => navigate('/login')}
                 >
                   Start Your Journey
                   <Sparkles className="w-5 h-5 ml-2" />
