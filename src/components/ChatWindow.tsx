@@ -35,6 +35,28 @@ export const ChatWindow = () => {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    const handleResetChat = () => {
+      setMessages([
+        {
+          id: "1",
+          text: "Hello! I'm here to help you reflect and find clarity. What's on your mind today? 🌱",
+          isUser: false,
+          timestamp: "Just now"
+        }
+      ]);
+      setInputValue("");
+      setIsLoading(false);
+      setIsListening(false);
+    };
+
+    window.addEventListener('resetChat', handleResetChat);
+    
+    return () => {
+      window.removeEventListener('resetChat', handleResetChat);
+    };
+  }, []);
+
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 

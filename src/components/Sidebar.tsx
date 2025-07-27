@@ -31,6 +31,11 @@ export const Sidebar = () => {
     // Redirect to homepage
     window.location.href = '/';
   };
+
+  const handleNewReflection = () => {
+    // Dispatch a custom event to reset the chat
+    window.dispatchEvent(new CustomEvent('resetChat'));
+  };
   
   return (
     <div className="w-80 bg-gradient-soft border-r border-border/50 flex flex-col h-full">
@@ -46,10 +51,28 @@ export const Sidebar = () => {
           </div>
         </div>
         
-        <Button className="w-full shadow-soft transition-smooth hover:shadow-glow">
-          <Plus className="w-4 h-4 mr-2" />
-          New Reflection
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button className="w-full shadow-soft transition-smooth hover:shadow-glow">
+              <Plus className="w-4 h-4 mr-2" />
+              New Reflection
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Start a New Reflection?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will clear your current conversation and start a fresh reflection session. Your previous conversation will not be saved.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleNewReflection}>
+                Start New Reflection
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
 
       {/* Sessions List */}
