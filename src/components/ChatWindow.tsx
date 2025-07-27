@@ -68,29 +68,68 @@ export const ChatWindow = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentInput = inputValue;
     setInputValue("");
     setIsLoading(true);
 
-    // Simulate AI response (replace with actual API call)
-    setTimeout(() => {
-      const aiResponses = [
-        "I understand you're feeling this way. Let's explore this together. What do you think might be contributing to these feelings?",
-        "That's a thoughtful reflection. Sometimes taking a step back can provide new perspectives. How does this situation align with your core values?",
-        "Thank you for sharing that with me. It sounds like you're being very mindful about this. What would you tell a close friend in a similar situation?",
-        "I hear you. This seems important to you. What's one small step you could take today to move in a positive direction?",
-        "That's a profound insight. Sometimes our emotions are messengers. What might this feeling be trying to tell you?"
-      ];
+    try {
+      // Call the real LifeGuru API
+      const response = await fetch('https://maferoz-lifeguru.hf.space/ask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: currentInput
+        }),
+        // Add timeout
+        signal: AbortSignal.timeout(30000) // 30 second timeout
+      });
 
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: aiResponses[Math.floor(Math.random() * aiResponses.length)],
+        text: data.response || "I apologize, but I couldn't generate a response. Please try again.",
         isUser: false,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
 
       setMessages(prev => [...prev, aiMessage]);
+      
+      // Show a toast if Islamic context was detected
+      if (data.is_islamic) {
+        toast({
+          title: "Islamic Guidance Provided",
+          description: `Guidance type: ${data.guidance_type || 'Spiritual'}`,
+        });
+      }
+      
+    } catch (error) {
+      console.error('API Error:', error);
+      
+      // Fallback message on error
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I apologize, but I'm having trouble connecting right now. Please check your internet connection and try again. If the problem persists, the service might be temporarily unavailable.",
+        isUser: false,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+
+      setMessages(prev => [...prev, errorMessage]);
+      
+      toast({
+        title: "Connection Error",
+        description: "Unable to connect to LifeGuru. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
