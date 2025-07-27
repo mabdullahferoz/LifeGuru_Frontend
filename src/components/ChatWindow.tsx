@@ -150,9 +150,9 @@ export const ChatWindow = () => {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full chat-bg">
       {/* Messages */}
-      <div className="flex-1 p-6 overflow-y-auto space-y-4">
+      <div className="flex-1 p-6 overflow-y-auto space-y-2">
         {messages.map((message) => (
           <MessageBubble
             key={message.id}
@@ -163,8 +163,8 @@ export const ChatWindow = () => {
         ))}
         
         {isLoading && (
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-full bg-card border flex items-center justify-center shadow-soft">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-9 h-9 rounded-full bg-card border border-border flex items-center justify-center shadow-warm">
               <div className="w-3 h-3 bg-primary/60 rounded-full animate-pulse" />
             </div>
             <div className="chat-bubble-ai">
@@ -181,7 +181,7 @@ export const ChatWindow = () => {
       </div>
 
       {/* Input Area */}
-      <div className="p-6 border-t bg-gradient-soft">
+      <div className="p-6 border-t border-border/50 bg-gradient-to-b from-transparent to-chat-bg/80 backdrop-blur-sm">
         <div className="flex items-end gap-3">
           <div className="flex-1">
             <Textarea
@@ -189,7 +189,7 @@ export const ChatWindow = () => {
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Share what's on your mind..."
-              className="min-h-[60px] resize-none shadow-soft border-0 bg-card/80 backdrop-blur-sm transition-smooth focus:shadow-glow"
+              className="min-h-[60px] resize-none shadow-warm chat-input transition-smooth focus:shadow-glow focus:border-primary/50 text-card-foreground placeholder:text-muted-foreground"
               disabled={isLoading}
             />
           </div>
@@ -199,8 +199,8 @@ export const ChatWindow = () => {
               variant="outline"
               size="icon"
               onClick={toggleListening}
-              className={`shadow-soft transition-smooth hover:shadow-glow ${
-                isListening ? 'bg-destructive/10 border-destructive/30' : ''
+              className={`shadow-warm transition-smooth hover:shadow-glow border-border/70 bg-card/80 ${
+                isListening ? 'bg-destructive/10 border-destructive/30' : 'hover:bg-accent/40'
               }`}
             >
               {isListening ? <MicOff size={20} /> : <Mic size={20} />}
@@ -209,7 +209,7 @@ export const ChatWindow = () => {
             <Button
               onClick={handleSendMessage}
               disabled={!inputValue.trim() || isLoading}
-              className="shadow-soft transition-smooth hover:shadow-glow"
+              className="shadow-warm transition-smooth hover:shadow-glow bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <Send size={20} />
             </Button>

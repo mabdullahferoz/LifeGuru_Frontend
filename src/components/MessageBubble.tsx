@@ -8,19 +8,27 @@ interface MessageBubbleProps {
 
 export const MessageBubble = ({ message, isUser, timestamp }: MessageBubbleProps) => {
   return (
-    <div className={`flex items-start gap-3 mb-4 animate-fade-in ${isUser ? 'flex-row-reverse' : ''}`}>
-      <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center shadow-soft ${
-        isUser ? 'bg-primary text-primary-foreground' : 'bg-card border'
+    <div className={`flex items-start gap-3 mb-6 animate-fade-in ${isUser ? 'flex-row-reverse' : ''}`}>
+      <div className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center shadow-card border transition-smooth ${
+        isUser 
+          ? 'bg-primary text-primary-foreground border-primary/20' 
+          : 'bg-card text-foreground border-border'
       }`}>
-        {isUser ? <User size={16} /> : <Bot size={16} />}
+        {isUser ? <User size={18} /> : <Bot size={18} />}
       </div>
       
-      <div className={`max-w-xs lg:max-w-md px-4 py-3 shadow-soft transition-smooth hover:shadow-glow ${
+      <div className={`max-w-xs lg:max-w-md px-4 py-3 transition-smooth ${
         isUser ? 'chat-bubble-user' : 'chat-bubble-ai'
       }`}>
-        <p className="text-sm leading-relaxed">{message}</p>
+        <p className={`text-sm leading-relaxed ${
+          isUser ? 'text-primary-foreground' : 'text-card-foreground'
+        }`}>
+          {message}
+        </p>
         {timestamp && (
-          <p className="text-xs opacity-60 mt-2">
+          <p className={`text-xs mt-2 ${
+            isUser ? 'text-primary-foreground/70' : 'text-muted-foreground'
+          }`}>
             {timestamp}
           </p>
         )}

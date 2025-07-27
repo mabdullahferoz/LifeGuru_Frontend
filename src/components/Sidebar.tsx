@@ -38,22 +38,22 @@ export const Sidebar = () => {
   };
   
   return (
-    <div className="w-80 bg-gradient-soft border-r border-border/50 flex flex-col h-full">
+    <div className="w-80 sidebar-bg border-r border-sidebar-border flex flex-col h-full shadow-soft">
       {/* Header */}
-      <div className="p-6 border-b border-border/50">
+      <div className="p-6 border-b border-sidebar-border">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-gradient-calm rounded-xl flex items-center justify-center shadow-soft">
-            <Sparkles className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 bg-sidebar-primary rounded-xl flex items-center justify-center shadow-card">
+            <Sparkles className="w-5 h-5 text-sidebar-primary-foreground" />
           </div>
           <div>
-            <h1 className="font-semibold text-lg">LifeGuru</h1>
-            <p className="text-sm text-muted-foreground">Your Reflective Assistant</p>
+            <h1 className="font-semibold text-lg text-sidebar-foreground">LifeGuru</h1>
+            <p className="text-sm text-sidebar-foreground/70">Your Reflective Assistant</p>
           </div>
         </div>
         
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button className="w-full shadow-soft transition-smooth hover:shadow-glow">
+            <Button className="w-full shadow-card transition-smooth hover:shadow-glow bg-sidebar-primary hover:bg-sidebar-primary/90 text-sidebar-primary-foreground">
               <Plus className="w-4 h-4 mr-2" />
               New Reflection
             </Button>
@@ -83,21 +83,21 @@ export const Sidebar = () => {
       </div>
 
       {/* Bottom Navigation */}
-      <div className="p-4 border-t border-border/50 space-y-2">
-        <Button variant="ghost" className="w-full justify-start text-sm">
+      <div className="p-4 border-t border-sidebar-border space-y-2">
+        <Button variant="ghost" className="w-full justify-start text-sm hover:bg-sidebar-accent/70 transition-smooth text-sidebar-foreground">
           <MessageCircle className="w-4 h-4 mr-3" />
           Active Chat
         </Button>
         
-        <Button variant="ghost" className="w-full justify-start text-sm">
+        <Button variant="ghost" className="w-full justify-start text-sm hover:bg-sidebar-accent/70 transition-smooth text-sidebar-foreground">
           <Settings className="w-4 h-4 mr-3" />
           Settings
         </Button>
         
-        <div className="pt-2 border-t border-border/50">
+        <div className="pt-2 border-t border-sidebar-border">
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="ghost" className="w-full justify-start text-sm text-muted-foreground hover:text-destructive">
+              <Button variant="ghost" className="w-full justify-start text-sm text-sidebar-foreground/70 hover:text-destructive hover:bg-destructive/5 transition-smooth">
                 <LogOut className="w-4 h-4 mr-3" />
                 Sign Out
               </Button>

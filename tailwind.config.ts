@@ -75,6 +75,16 @@ export default {
 				'gradient-calm': 'var(--gradient-calm)',
 				'gradient-soft': 'var(--gradient-soft)',
 				'gradient-hero': 'var(--gradient-hero)',
+				'homepage-bg': 'var(--homepage-bg)',
+				'chat-bg': 'var(--chat-bg)',
+				'sidebar-bg': 'var(--sidebar-bg)',
+			},
+			boxShadow: {
+				'soft': 'var(--shadow-soft)',
+				'glow': 'var(--shadow-glow)',
+				'float': 'var(--shadow-float)',
+				'card': 'var(--shadow-card)',
+				'warm': 'var(--shadow-warm)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
